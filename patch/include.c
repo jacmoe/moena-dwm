@@ -15,6 +15,7 @@
 #include "cyclelayouts.c"
 #include "movestack.c"
 #include "rotatestack.c"
+#include "swallow.c"
 #include "vanitygaps.c"
 /* Layouts */
 #include "layout_facts.c"
