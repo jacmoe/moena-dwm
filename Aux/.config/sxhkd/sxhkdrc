@@ -1,0 +1,14 @@
+Print
+	flameshot gui
+
+super + control + {f, x, t, d}
+	{firefox, emacs, thunar, /home/moena/.local/bin/amphetype}
+
+super + control + q
+	/home/moena/.local/bin/powermenu.sh
+
+super + control + p
+	gnome-pomodoro
+
+super + control + u
+	/home/moena/.local/bin/utils.sh
