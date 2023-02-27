@@ -9,5 +9,5 @@ slstatus &
 sxhkd &
 dunst -conf ~/.config/dunst/dunstrc &
 nm-applet &
-volumeicon &
 /usr/bin/dropbox &
+volumeicon &
