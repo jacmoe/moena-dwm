@@ -1,17 +1,14 @@
 	/*                       fg                bg                border                float */
 
-static const char col_3[]  = "#c678DD";
-static const char col_4[]  = "#E06C75";
-
 static char normfgcolor[]                = "#bbbbbb";
 static char normbgcolor[]                = "#222222";
 static char normbordercolor[]            = "#444444";
 static char normfloatcolor[]             = "#c678dd";
 
 static char selfgcolor[]                 = "#eeeeee";
-static char selbgcolor[]                 = "#c678dd";
-static char selbordercolor[]             = "#c678dd";
-static char selfloatcolor[]              = "#c678dd";
+static char selbgcolor[]                 = "#ac3ba8";
+static char selbordercolor[]             = "#ac3ba8";
+static char selfloatcolor[]              = "#ac3ba8";
 
 static char titlenormfgcolor[]           = "#bbbbbb";
 static char titlenormbgcolor[]           = "#222222";
