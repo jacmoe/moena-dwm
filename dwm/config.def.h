@@ -187,6 +187,7 @@ static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
 static const char *utilscmd[]  = { "/home/moena/.local/bin/utils.sh", NULL };
 static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu.sh", NULL };
 static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
+static const char *lockcmd[]  = { "slock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
@@ -194,6 +195,7 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_x,          spawn,                  {.v = appscmd } },
 	{ MODKEY|ControlMask,           XK_u,          spawn,                  {.v = utilscmd } },
 	{ MODKEY|ControlMask,           XK_q,          spawn,                  {.v = powercmd } },
+	{ MODKEY|ControlMask,           XK_l,          spawn,                  {.v = lockcmd } },
 	{ MODKEY,                       XK_p,          spawn,                  {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,     spawn,                  {.v = termcmd } },
 	{ MODKEY,                       XK_b,          togglebar,              {0} },
