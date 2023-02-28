@@ -14,7 +14,7 @@ function apps {
 	elif [[ $selected = "5-zigcider" ]]; then
 		emacs --with-profile prog
 	elif [[ $selected = "6-amphetype" ]]; then
-		amphetype
+		$HOME/.local/bin/amphetype
 	fi
 }
 
