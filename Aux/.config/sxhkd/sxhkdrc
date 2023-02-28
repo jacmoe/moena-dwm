@@ -1,5 +1,0 @@
-Print
-	flameshot gui
-
-super + control + {q,u,x}
-	{powermenu.sh, utils.sh, apps.sh}

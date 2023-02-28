@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 
 function apps {
-	options="Cancel\nFirefox\nEmacs\nPomodoro\nThunar\nP-Emacs\nAmphetype\n"
+	options="cancel\n1-firefox\n2-emacs\n3-pomodoro\n4-thunar\n5-zigcider\n6-amphetype\n"
 	selected=$(echo -e $options | /home/moena/.local/bin/dwmmenu)
-	if [[ $selected = "Firefox" ]]; then
+	if [[ $selected = "1-firefox" ]]; then
 		firefox
-	elif [[ $selected = "Emacs" ]]; then
+	elif [[ $selected = "2-emacs" ]]; then
 		emacs
-	elif [[ $selected = "Pomodoro" ]]; then
+	elif [[ $selected = "3-pomodoro" ]]; then
 		gnome-pomodoro
-	elif [[ $selected = "Thunar" ]]; then
+	elif [[ $selected = "4-thunar" ]]; then
 		thunar
-	elif [[ $selected = "P-Emacs" ]]; then
+	elif [[ $selected = "5-zigcider" ]]; then
 		emacs --with-profile prog
-	elif [[ $selected = "Amphetype" ]]; then
+	elif [[ $selected = "6-amphetype" ]]; then
 		amphetype
 	fi
 }
