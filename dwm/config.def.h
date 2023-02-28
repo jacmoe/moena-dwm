@@ -186,10 +186,11 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
 static const char *utilscmd[]  = { "/home/moena/.local/bin/utils.sh", NULL };
 static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu.sh", NULL };
-
+static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
+	{ 0,                            XK_Print,      spawn,                  {.v = prtscrcmd } },
 	{ MODKEY|ControlMask,           XK_x,          spawn,                  {.v = appscmd } },
 	{ MODKEY|ControlMask,           XK_u,          spawn,                  {.v = utilscmd } },
 	{ MODKEY|ControlMask,           XK_q,          spawn,                  {.v = powercmd } },
