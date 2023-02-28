@@ -9,4 +9,3 @@ slstatus &
 dunst -conf ~/.config/dunst/dunstrc &
 nm-applet &
 /usr/bin/dropbox &
-volumeicon &
