@@ -21,7 +21,7 @@ static const int bar_height              = 0;   /* 0 means derive from font, >= 
 /* Status is to be shown on: -1 (all monitors), 0 (a specific monitor by index), 'A' (active monitor) */
 static const int statusmon               = 'A';
 static const unsigned int systrayspacing = 2;   /* systray spacing */
-static const int showsystray             = 1;   /* 0 means no systray */
+static const int showsystray             = 0;   /* 0 means no systray */
 
 /* Indicators: see patch/bar_indicators.h for options */
 static int tagindicatortype              = INDICATOR_TOP_LEFT_SQUARE;
@@ -182,7 +182,7 @@ static const char *dmenucmd[] = {
 	"-sf", selfgcolor,
 	NULL
 };
-static const char *roficmd[] = { "rofi", "-show", "run", NULL};
+static const char *roficmd[] = { "rofi", "-show", "drun", "-icon-theme", "'papirus'", "-show-icons", NULL};
 static const char *termcmd[]  = { "wezterm", NULL };
 static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
 static const char *utilscmd[]  = { "/home/moena/.local/bin/utils.sh", NULL };
