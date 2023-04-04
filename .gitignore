@@ -1,2 +1,4 @@
 config.h
 *.o
+dwm/dwm
+slstatus/slstatus
