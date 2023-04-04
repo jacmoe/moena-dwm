@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 ibus-daemon -drxR &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 numlockx on
