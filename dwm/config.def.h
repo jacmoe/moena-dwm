@@ -183,7 +183,7 @@ static const char *dmenucmd[] = {
 	NULL
 };
 static const char *roficmd[] = { "rofi", "-show", "run", NULL};
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "wezterm", NULL };
 static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
 static const char *utilscmd[]  = { "/home/moena/.local/bin/utils.sh", NULL };
 static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu.sh", NULL };
