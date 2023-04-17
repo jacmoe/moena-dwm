@@ -190,11 +190,13 @@ static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu", NULL };
 static const char *bookmarkcmd[]  = { "/home/moena/.config/rofi/bookmarks/bookmarks.sh", NULL };
 static const char *bookmarksearchcmd[]  = { "/home/moena/.local/bin/bookmarks.sh", NULL };
 static const char *prtscrcmd[]  = { "flameshot", "gui", NULL };
+static const char *prtscrcmdex[]  = { "xfce4-screenshooter", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key            function                argument */
 	{ 0,                            XK_Print,      spawn,                  {.v = prtscrcmd } },
+	{ MODKEY,                       XK_Print,      spawn,                  {.v = prtscrcmdex } },
 	{ MODKEY|ControlMask,           XK_x,          spawn,                  {.v = appscmd } },
 	{ MODKEY|ControlMask,           XK_u,          spawn,                  {.v = utilscmd } },
 	{ MODKEY|ControlMask,           XK_q,          spawn,                  {.v = powercmd } },
