@@ -113,7 +113,7 @@ static const Rule rules[] = {
 	RULE(.class = "Gimp", .tags = 1 << 4)
 	RULE(.class = "Firefox", .tags = 1 << 7)
     RULE(.class = "QjackCtl", .isfloating = 1)
-    RULE(.class = "Qsynth", .isfloating = 1)
+    RULE(.class = "qsynth", .isfloating = 1)
 };
 
 
@@ -149,9 +149,9 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]= tile",      tile },    /* first entry is default */
+	{ "[M] monocle",      monocle },    /* first entry is default */
+	{ "[]= tile",      tile },
 	{ "><> float",      NULL },    /* no layout function means floating behavior */
-	{ "[M] monocle",      monocle },
 	{ "TTT bstack",      bstack },
 	{ "=== hbstack",      bstackhoriz },
 	{ "HHH grid",      grid },
