@@ -1,4 +1,14 @@
 * Moena-DWM
-This is my own personal build of the Suckless Dynamic Window Manager, DWM.
+This is my own personal build of the Suckless Dynamic Window Manager, [[https://dwm.suckless.org/][DWM]].
 
-[[https://github.com/bakkeby/dwm-flexipatch]]
+Currently using DWM version 6.5, the latest as of June 2025.
+
+This DWM build is not heavily patched. In fact, I am only using four patches. Have created a couple of patches myself in order to keep the source tree clean.
+
+I am using [[https://savannah.nongnu.org/projects/quilt][Quilt]] to manage the patches.
+
+To build and install, I run `quilt push -a` to apply all the patches, followed by `rebuild.sh`.
+
+I then run `quilt pop -a` to un-apply the patches and return to a state that is either pristine or in need of a git commit (because one patch was updated).
+
+Keeping all changes in patches makes it much easier to upgrade DWM to a new version when that happens.
