@@ -3,7 +3,7 @@ This is my own personal build of the Suckless Dynamic Window Manager, [[https://
 
 Currently using DWM version 6.5, the latest as of June 2025.
 
-This DWM build is not heavily patched. In fact, I am only using four patches. Have created a couple of patches myself in order to keep the source tree clean.
+This DWM build is not heavily patched. In fact, I am only using five patches. Have created a couple of patches myself in order to keep the source tree clean.
 
 I am using [[https://savannah.nongnu.org/projects/quilt][Quilt]] to manage the patches.
 
