@@ -8,11 +8,11 @@ Subject: [PATCH] add setscheme() to cycle between colorschemes
  dwm.c        | 49 ++++++++++++++++++++++++++++++++++++++++---------
  2 files changed, 51 insertions(+), 13 deletions(-)
 
-diff --git a/config.def.h b/config.def.h
-index 9efa774..f87f707 100644
---- a/config.def.h
-+++ b/config.def.h
-@@ -12,10 +12,16 @@ static const char col_gray2[]       = "#444444";
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -15,10 +15,16 @@ static const char col_gray2[]       = "#
  static const char col_gray3[]       = "#bbbbbb";
  static const char col_gray4[]       = "#eeeeee";
  static const char col_cyan[]        = "#005577";
@@ -32,19 +32,19 @@ index 9efa774..f87f707 100644
 +	},
  };
  
- /* tagging */
-@@ -85,6 +91,7 @@ static const Key keys[] = {
- 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
- 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
- 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+ static const char *const autostart[] = {
+@@ -96,6 +102,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
+ 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
 +	{ MODKEY,                       XK_s,      setscheme,      {.i = +1 } },
  	TAGKEYS(                        XK_1,                      0)
  	TAGKEYS(                        XK_2,                      1)
  	TAGKEYS(                        XK_3,                      2)
-diff --git a/dwm.c b/dwm.c
-index f1d86b2..9c00a09 100644
---- a/dwm.c
-+++ b/dwm.c
+Index: dwm/dwm.c
+===================================================================
+--- dwm.orig/dwm.c
++++ dwm/dwm.c
 @@ -59,7 +59,7 @@
  
  /* enums */
@@ -54,15 +54,15 @@ index f1d86b2..9c00a09 100644
  enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
         NetWMFullscreen, NetActiveWindow, NetWMWindowType,
         NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
-@@ -202,6 +202,7 @@ static void setfocus(Client *c);
- static void setfullscreen(Client *c, int fullscreen);
+@@ -204,6 +204,7 @@ static void setfullscreen(Client *c, int
+ static void setgaps(const Arg *arg);
  static void setlayout(const Arg *arg);
  static void setmfact(const Arg *arg);
 +static void setscheme(const Arg *arg);
  static void setup(void);
  static void seturgent(Client *c, int urg);
  static void showhide(Client *c);
-@@ -262,7 +263,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
+@@ -267,7 +268,7 @@ static void (*handler[LASTEvent]) (XEven
  static Atom wmatom[WMLast], netatom[NetLast];
  static int running = 1;
  static Cur *cursor[CurLast];
@@ -71,7 +71,7 @@ index f1d86b2..9c00a09 100644
  static Display *dpy;
  static Drw *drw;
  static Monitor *mons, *selmon;
-@@ -486,9 +487,9 @@ cleanup(void)
+@@ -521,9 +522,9 @@ cleanup(void)
  		cleanupmon(mons);
  	for (i = 0; i < CurLast; i++)
  		drw_cur_free(drw, cursor[i]);
@@ -84,11 +84,10 @@ index f1d86b2..9c00a09 100644
  	XDestroyWindow(dpy, wmcheckwin);
  	drw_free(drw);
  	XSync(dpy, False);
-@@ -1536,10 +1537,37 @@ setmfact(const Arg *arg)
- 	arrange(selmon);
+@@ -1593,9 +1594,36 @@ setmfact(const Arg *arg)
  }
  
-+void
+ void
 +setscheme(const Arg *arg)
 +{
 +	ptrdiff_t si;
@@ -115,7 +114,7 @@ index f1d86b2..9c00a09 100644
 +			XSetWindowBorder(dpy, c->win, scheme[c == selmon->sel ? SchemeSel : SchemeNorm][ColBorder].pixel);
 +}
 +
- void
++void
  setup(void)
  {
 -	int i;
@@ -123,7 +122,7 @@ index f1d86b2..9c00a09 100644
  	XSetWindowAttributes wa;
  	Atom utf8string;
  	struct sigaction sa;
-@@ -1584,9 +1612,12 @@ setup(void)
+@@ -1658,9 +1686,12 @@ setup(void)
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
  	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
  	/* init appearance */
@@ -139,6 +138,3 @@ index f1d86b2..9c00a09 100644
  	/* init bars */
  	updatebars();
  	updatestatus();
--- 
-2.47.1
-
