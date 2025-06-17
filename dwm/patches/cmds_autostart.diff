@@ -2,11 +2,70 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm.orig/config.def.h
 +++ dwm/config.def.h
-@@ -27,6 +27,7 @@ static const char *colors[][SchemeN][3]
+@@ -23,17 +23,22 @@ static const char *colors[][SchemeN][3]
+ 	},
+ 	{ /* light */
+ 		[SchemeNorm] = { col_gray2, col_gray4, col_gray3 },
+-		[SchemeSel]  = { col_gray1, col_cyan,  col_cyan  },
++		[SchemeSel]  = { col_gray1, col_gray2,  col_gray3 },
  	},
  };
  
 +
  static const char *const autostart[] = {
- 	"st", NULL,
+-	"st", NULL,
++    "lxpolkit", NULL,
++	"picom", NULL,
++    "nitrogen", "--restore", NULL,
++    "/bin/sh", "-c", "/home/moena/.local/share/dwm/autostart.sh", NULL,
++	"slstatus", NULL,
  	NULL /* terminate */
+ };
+ 
+ /* tagging */
+-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
++static const char *tags[] = { "1", "2", "3" };
+ 
+ static const Rule rules[] = {
+ 	/* xprop(1):
+@@ -59,7 +64,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -72,12 +77,19 @@ static const Layout layouts[] = {
+ /* commands */
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+-static const char *termcmd[]  = { "st", NULL };
++static const char *roficmd[] = { "rofi", "-show", "drun", "-icon-theme", "'papirus'", "-show-icons", NULL};
++static const char *termcmd[]  = { "xfce4-terminal", NULL };
++static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
++static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu", NULL };
++static const char *prtscrcmd[]  = { "xfce4-screenshooter", NULL };
+ 
+ static const Key keys[] = {
+ 	/* modifier                     key        function        argument */
+-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
++	{ MODKEY|ControlMask,           XK_s,      spawn,          {.v = prtscrcmd } },
++	{ MODKEY|ControlMask,           XK_x,      spawn,          {.v = appscmd } },
++	{ MODKEY|ControlMask,           XK_q,      spawn,          {.v = powercmd } },
++	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
++	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+ 	{ MODKEY,                       XK_n,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_e,      focusstack,     {.i = -1 } },
+@@ -85,7 +97,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_u,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_i,      setmfact,       {.f = +0.05} },
+-	{ MODKEY,                       XK_Return, zoom,           {0} },
++	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+ 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
