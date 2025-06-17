@@ -1,0 +1,140 @@
+From d067cd3815e35c8c5b804893a551d24fa7505e4b Mon Sep 17 00:00:00 2001
+From: Listeria monocytogenes <listeria@disroot.org>
+Date: Wed, 26 Jun 2024 11:49:20 -0300
+Subject: [PATCH] add setscheme() to cycle between colorschemes
+
+---
+ config.def.h | 15 +++++++++++----
+ dwm.c        | 49 ++++++++++++++++++++++++++++++++++++++++---------
+ 2 files changed, 51 insertions(+), 13 deletions(-)
+
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -16,10 +16,16 @@ static const char col_gray2[]       = "#
+ static const char col_gray3[]       = "#bbbbbb";
+ static const char col_gray4[]       = "#eeeeee";
+ static const char col_cyan[]        = "#005577";
+-static const char *colors[][3]      = {
+-	/*               fg         bg         border   */
+-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
++static const char *colors[][SchemeN][3] = {
++		/*               fg         bg         border   */
++	{ /* dark */
++		[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
++		[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
++	},
++	{ /* light */
++		[SchemeNorm] = { col_gray2, col_gray4, col_gray3 },
++		[SchemeSel]  = { col_gray1, col_cyan,  col_cyan  },
++	},
+ };
+ 
+ static const char *const autostart[] = {
+@@ -111,6 +117,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +5 } },
+ 	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = GAP_RESET } },
+ 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
++	{ MODKEY,                       XK_s,      setscheme,      {.i = +1 } },
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+Index: dwm/dwm.c
+===================================================================
+--- dwm.orig/dwm.c
++++ dwm/dwm.c
+@@ -62,7 +62,7 @@
+ 
+ /* enums */
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+-enum { SchemeNorm, SchemeSel }; /* color schemes */
++enum { SchemeNorm, SchemeSel, SchemeN /* keeplast */ }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
+        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
+        NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+@@ -208,6 +208,7 @@ static void setfullscreen(Client *c, int
+ static void setgaps(const Arg *arg);
+ static void setlayout(const Arg *arg);
+ static void setmfact(const Arg *arg);
++static void setscheme(const Arg *arg);
+ static void setup(void);
+ static void seturgent(Client *c, int urg);
+ static void showhide(Client *c);
+@@ -271,7 +272,7 @@ static void (*handler[LASTEvent]) (XEven
+ static Atom wmatom[WMLast], netatom[NetLast];
+ static int running = 1;
+ static Cur *cursor[CurLast];
+-static Clr **scheme;
++static Clr **schemes, **scheme;
+ static Display *dpy;
+ static Drw *drw;
+ static Monitor *mons, *selmon;
+@@ -525,9 +526,9 @@ cleanup(void)
+ 		cleanupmon(mons);
+ 	for (i = 0; i < CurLast; i++)
+ 		drw_cur_free(drw, cursor[i]);
+-	for (i = 0; i < LENGTH(colors); i++)
+-		free(scheme[i]);
+-	free(scheme);
++	for (i = 0; i < LENGTH(colors) * SchemeN; i++)
++		free(schemes[i]);
++	free(schemes);
+ 	XDestroyWindow(dpy, wmcheckwin);
+ 	drw_free(drw);
+ 	XSync(dpy, False);
+@@ -1626,9 +1627,36 @@ setmfact(const Arg *arg)
+ }
+ 
+ void
++setscheme(const Arg *arg)
++{
++	ptrdiff_t si;
++	Monitor *m;
++	Client *c;
++
++	/* select default color scheme */
++	if (!arg || arg->i == 0)
++		si = 0;
++	else
++		si = (scheme - schemes) + arg->i * SchemeN;
++
++	/* wrap around, won't work if (abs(arg->i) > LENGTH(colors)) */
++	if (si < 0)
++		si += LENGTH(colors) * SchemeN;
++	else if (si >= LENGTH(colors) * SchemeN)
++		si -= LENGTH(colors) * SchemeN;
++
++	scheme = &schemes[si];
++
++	drawbars();
++	for (m = mons; m; m = m->next)
++		for (c = m->clients; c; c = c->next)
++			XSetWindowBorder(dpy, c->win, scheme[c == selmon->sel ? SchemeSel : SchemeNorm][ColBorder].pixel);
++}
++
++void
+ setup(void)
+ {
+-	int i;
++	int i, j;
+ 	XSetWindowAttributes wa;
+ 	Atom utf8string;
+ 	struct sigaction sa;
+@@ -1691,9 +1719,12 @@ setup(void)
+ 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
+ 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
+ 	/* init appearance */
+-	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
+-	for (i = 0; i < LENGTH(colors); i++)
+-		scheme[i] = drw_scm_create(drw, colors[i], 3);
++	schemes = ecalloc(LENGTH(colors), SchemeN * sizeof(Clr *));
++	for (j = LENGTH(colors) - 1; j >= 0; j--) {
++		scheme = &schemes[j * SchemeN];
++		for (i = 0; i < SchemeN; i++)
++			scheme[i] = drw_scm_create(drw, colors[j][i], 3);
++	}
+ 	/* init bars */
+ 	updatebars();
+ 	updatestatus();
