@@ -13,9 +13,10 @@ This DWM build is not heavily patched. In fact, I am only using five patches:
 
 I have created then created a couple of patches for my changes in order to keep the source tree clean:
 
-- =cmds_autostart.diff=
-- =monocle_gaps.diff=
-- =fixes.diff=
+- =cmds_autostart.diff= with most of my custom changes
+- =monocle_gaps.diff= snippet of refactored monocle() function, to support gaps on monocle layout too.
+  Taken from [[https://gist.github.com/Solamil/7a744374fc24db9e7e07aca313f0fed6/]]
+- =fixes.diff= with some fixes, like removing unused layouts from the layouts array and swapping a couple of key commands
 
 I am using [[https://savannah.nongnu.org/projects/quilt][Quilt]] to manage the patches.
 
