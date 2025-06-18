@@ -68,6 +68,6 @@ static const struct arg args[] = {
 	{ ram_perc, "[ RAM: %2s% ]", NULL},
 	{ cpu_perc, "[ CPU: %2s% ]", NULL},
 	{ keymap, "[ %s ]", NULL},
-	{ battery_perc, "[ Bat: %s% ]", "BAT0"},
+	/*{ battery_perc, "[ Bat: %s% ]", "BAT0"},*/
 	{ datetime, "[ %s ]", "%a, %B %d - %H:%M" },
 };
