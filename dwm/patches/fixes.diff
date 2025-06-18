@@ -2,10 +2,12 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm.orig/config.def.h
 +++ dwm/config.def.h
-@@ -67,17 +67,6 @@ static const Layout layouts[] = {
+@@ -65,19 +65,8 @@ static const int lockfullscreen = 1; /*
+ 
+ static const Layout layouts[] = {
  	/* symbol     arrange function */
- 	{ "[]=",      tile },    /* first entry is default */
- 	{ "[M]",      monocle },
+-	{ "[]=",      tile },    /* first entry is default */
+-	{ "[M]",      monocle },
 -	{ "[@]",      spiral },
 -	{ "[\\]",     dwindle },
 -	{ "D[]",      deck },
@@ -17,16 +19,20 @@ Index: dwm/config.def.h
 -	{ ":::",      gaplessgrid },
 -	{ "|M|",      centeredmaster },
 -	{ ">M>",      centeredfloatingmaster },
++	{ "[M]",      monocle },    /* first entry is default */
++	{ "[]=",      tile },
  	{ "><>",      NULL },    /* no layout function means floating behavior */
  	{ NULL,       NULL },
  };
-@@ -137,8 +126,8 @@ static const Key keys[] = {
+@@ -136,9 +125,9 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_s,      setscheme,      {.i = +1 } },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
  	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
- 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 -	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 -	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
++	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[0]} },
++	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
 +	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
  	{ MODKEY,                       XK_space,  setlayout,      {0} },
  	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
