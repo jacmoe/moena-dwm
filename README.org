@@ -3,7 +3,19 @@ This is my own personal build of the Suckless Dynamic Window Manager, [[https://
 
 Currently using DWM version 6.5, the latest as of June 2025.
 
-This DWM build is not heavily patched. In fact, I am only using five patches. Have created a couple of patches myself in order to keep the source tree clean.
+This DWM build is not heavily patched. In fact, I am only using five patches:
+
+- =dwm-colemak_keys-20200907-61bb8b2.diff= from [[https://dwm.suckless.org/patches/colemak_keys/]]
+- =dwm-cool_autostart-6.5.diff= from [[https://dwm.suckless.org/patches/cool_autostart/]]
+- =dwm-vanitygaps-6.4.diff= from [[https://dwm.suckless.org/patches/vanitygaps/]]
+- =dwm-barpadding-20211020-a786211.diff= from [[https://dwm.suckless.org/patches/barpadding/]]
+- =dwm-colorschemes-6.5.diff= from [[https://dwm.suckless.org/patches/colorschemes/]]
+
+I have created then created a couple of patches for my changes in order to keep the source tree clean:
+
+- =cmds_autostart.diff=
+- =monocle_gaps.diff=
+- =fixes.diff=
 
 I am using [[https://savannah.nongnu.org/projects/quilt][Quilt]] to manage the patches.
 
