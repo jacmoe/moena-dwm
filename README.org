@@ -20,8 +20,8 @@ I have created then created a couple of patches for my changes in order to keep 
 
 I am using [[https://savannah.nongnu.org/projects/quilt][Quilt]] to manage the patches.
 
-To build and install, I run `quilt push -a` to apply all the patches, followed by `rebuild.sh`.
+To build and install, I run =quilt push -a= to apply all the patches, followed by =rebuild.sh=.
 
-I then run `quilt pop -a` to un-apply the patches and return to a state that is either pristine or in need of a git commit (because one patch was updated).
+I then run =quilt pop -a= to un-apply the patches and return to a state that is either pristine or in need of a git commit (because one patch was updated).
 
 Keeping all changes in patches makes it much easier to upgrade DWM to a new version when that happens.
