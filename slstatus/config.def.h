@@ -56,6 +56,7 @@ static const char unknown_str[] = "n/a";
  *                                                     thermal zone on FreeBSD
  *                                                     (tz0, tz1, etc.)
  * uid                 UID of current user             NULL
+ * up                  interface is running            interface name (eth0)
  * uptime              system uptime                   NULL
  * username            username of current user        NULL
  * vol_perc            OSS/ALSA volume in percent      mixer file (/dev/mixer)
@@ -65,9 +66,5 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 	/* function format          argument */
-	{ ram_perc, "[ RAM: %2s% ]", NULL},
-	{ cpu_perc, "[ CPU: %2s% ]", NULL},
-	{ keymap, "[ %s ]", NULL},
-	/*{ battery_perc, "[ Bat: %s% ]", "BAT0"},*/
-	{ datetime, "[ %s ]", "%a, %B %d - %H:%M" },
+	{ datetime, "%s",           "%F %T" },
 };
