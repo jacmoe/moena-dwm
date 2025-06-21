@@ -24,6 +24,15 @@ Index: dwm/config.def.h
  	{ "><>",      NULL },    /* no layout function means floating behavior */
  	{ NULL,       NULL },
  };
+@@ -97,7 +86,7 @@ static const Layout layouts[] = {
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+ static const char *roficmd[] = { "rofi", "-show", "drun", "-icon-theme", "'papirus'", "-show-icons", NULL};
+-static const char *termcmd[]  = { "xfce4-terminal", NULL };
++static const char *termcmd[]  = { "kitty", NULL };
+ static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
+ static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu", NULL };
+ static const char *prtscrcmd[]  = { "xfce4-screenshooter", NULL };
 @@ -136,9 +125,9 @@ static const Key keys[] = {
  	{ MODKEY,                       XK_s,      setscheme,      {.i = +1 } },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
