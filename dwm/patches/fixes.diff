@@ -33,6 +33,17 @@ Index: dwm/config.def.h
  static const char *appscmd[]  = { "/home/moena/.local/bin/apps.sh", NULL };
  static const char *powercmd[]  = { "/home/moena/.local/bin/powermenu", NULL };
  static const char *prtscrcmd[]  = { "xfce4-screenshooter", NULL };
+@@ -110,8 +99,8 @@ static const Key keys[] = {
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
+ 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+-	{ MODKEY,                       XK_n,      focusstack,     {.i = +1 } },
+-	{ MODKEY,                       XK_e,      focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_n,      focusstack,     {.i = -1 } },
++	{ MODKEY,                       XK_e,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_l,      incnmaster,     {.i = +1 } },
+ 	{ MODKEY,                       XK_u,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 @@ -136,9 +125,9 @@ static const Key keys[] = {
  	{ MODKEY,                       XK_s,      setscheme,      {.i = +1 } },
  	{ MODKEY,                       XK_Tab,    view,           {0} },
